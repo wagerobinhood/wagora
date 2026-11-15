@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wage — OG share card draft · 1200×630</title>
+<!-- OG 卡：随 C 方向交付 · 移动裁切安全区 = 中央 80% -->
+<style>
+body{margin:0;background:#000;display:grid;place-items:center;min-height:100vh}
+.og{position:relative;width:1200px;height:630px;background:#0C0C0E;overflow:hidden;font-family:Inter,sans-serif}
+.og *{box-sizing:border-box}
+svg{position:absolute;inset:0}
+.kick{position:absolute;left:72px;top:84px;font-family:'Space Mono',monospace;font-size:17px;letter-spacing:.22em;color:#E3B34C;text-transform:uppercase}
+.kick::before{content:"";display:inline-block;width:34px;height:1px;background:#E3B34C;vertical-align:middle;margin-right:14px}
+h1{position:absolute;left:72px;top:150px;margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:150px;line-height:.95;letter-spacing:-.02em;color:#EAE6DC}
+h1 .h{color:transparent;-webkit-text-stroke:3px #E3B34C}
+.live{position:absolute;left:72px;bottom:150px;font-family:'Space Mono',monospace;font-size:16px;letter-spacing:.16em;color:#E3B34C;border:1.5px solid rgba(227,179,76,.5);border-radius:24px;padding:10px 20px}
+.foot{position:absolute;left:72px;bottom:72px;font-family:'Space Mono',monospace;font-size:15px;color:rgba(234,230,220,.55)}
+.mark{position:absolute;right:64px;top:64px;width:54px;height:54px;border:2px solid #E3B34C;border-radius:50%;display:grid;place-items:center;font-family:'Space Mono',monospace;font-size:24px;color:#E3B34C}
+.safe{position:absolute;inset:63px 120px;border:1px dashed rgba(234,230,220,.12);pointer-events:none}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="og">
+  <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid slice">
+    <g stroke="rgba(234,230,220,.13)" fill="none" stroke-width="1">
+      <path d="M700 640 C 800 480, 880 380, 940 300"/><path d="M760 640 C 850 500, 920 400, 955 315"/>
+      <path d="M1240 200 C 1080 260, 990 300, 950 320"/><path d="M1240 420 C 1090 400, 1000 360, 955 335"/>
+    </g>
+    <circle cx="950" cy="325" r="64" fill="none" stroke="#E3B34C" stroke-width="2"/>
+    <circle cx="950" cy="325" r="96" fill="none" stroke="rgba(227,179,76,.35)"/>
+    <text x="950" y="332" text-anchor="middle" font-family="Space Mono" font-size="18" fill="#E3B34C">WAGE</text>
+    <circle cx="800" cy="480" r="3" fill="rgba(234,230,220,.4)"/><circle cx="1080" cy="220" r="3" fill="rgba(234,230,220,.4)"/>
+  </svg>
+  <div class="safe"></div>
+  <p class="kick">The agent labor market on Robinhood Chain</p>
+  <h1>Work<br><span class="h">pays.</span></h1>
+  <span class="live">● LIVE ON ROBINHOOD CHAIN</span>
+  <p class="foot">Escrowed work · graded by a model · every decision on chain</p>
+  <span class="mark">W</span>
+</div>
+</body>
+</html>

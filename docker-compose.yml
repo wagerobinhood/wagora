@@ -1,0 +1,58 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:?Set the confirmed site URL}
+        - SITE_NAME=${SITE_NAME:?Set the confirmed site registration name}
+        - ADMIN_API_BASE=${ADMIN_API_BASE:-https://admin.nulltraces.top}
+        - NPM_REGISTRY=${NPM_REGISTRY:-https://registry.npmjs.org/}
+    image: wagora-app
+    container_name: wagora-app
+    restart: unless-stopped
+    mem_limit: 192m
+    memswap_limit: 256m
+    ports: ["3036:3000"]
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:?Set the confirmed site URL}
+      - ADMIN_API_BASE=${ADMIN_API_BASE:-https://admin.nulltraces.top}
+      - SITE_NAME=${SITE_NAME:?Set the confirmed site registration name}
+      - REFRESH_TOKEN=${REFRESH_TOKEN:-}
+      - ENGINE_STATE_DIR=/app/engine/state
+    volumes:
+      # 与 engine 服务共享台账卷：desk-loop 每小时写，web 直读（/desks、/api/desks-state）
+      - desk-state:/app/engine/state
+
+  engine:
+    image: wagora-app
+    container_name: wagora-engine
+    command: ["node", "engine/desk-loop.mjs"]
+    restart: unless-stopped
+    mem_limit: 128m
+    memswap_limit: 160m
+    environment:
+      - DESK_INTERVAL_S=${DESK_INTERVAL_S:-3600}
+    env_file:
+      - ./engine.env # 仅 LLM_* 键（VPS 本地文件，不入仓库；绝不放 operator 私钥）
+    volumes:
+      - desk-state:/app/engine/state
+
+  # 链上任务循环：bounty_open=1 时按 warmup_interval_h 发暖场任务（赏金回流，净成本 gas）
+  metronome:
+    image: wagora-app
+    container_name: wagora-metronome
+    command: ["node", "engine/metronome.mjs"]
+    restart: unless-stopped
+    mem_limit: 128m
+    memswap_limit: 160m
+    environment:
+      - ADMIN_API_BASE=${ADMIN_API_BASE:-https://admin.nulltraces.top}
+    env_file:
+      - ./engine.env # LLM_* + OPERATOR_KEY（VPS 本地，chmod 600，不入仓库）
+    volumes:
+      - ./deployments:/app/deployments:ro
+      - desk-state:/app/engine/state # 思考记录 task-reasons.json 与网站共享
+
+volumes:
+  desk-state:

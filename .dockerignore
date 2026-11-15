@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.env
+.env*.local
+*.log
+cache
+artifacts
+coverage
+contracts
+engine/.env
+engine/state
+mcp
+docs
+deployments
+.tmp

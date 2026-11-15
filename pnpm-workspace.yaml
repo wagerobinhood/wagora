@@ -1,0 +1,8 @@
+allowBuilds:
+  keccak: set this to true or false
+  secp256k1: set this to true or false
+onlyBuiltDependencies:
+  - hardhat
+  - keccak
+  - secp256k1
+  - scrypt-js
